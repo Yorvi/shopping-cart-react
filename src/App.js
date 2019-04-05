@@ -16,17 +16,17 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log('App - Constructor');
+    console.log("App - Constructor");
   }
 
   componentDidMount() {
-    console.log('App - Mounted');
-  };
+    console.log("App - Mounted");
+  }
 
-  handleDelete = (counterId) => {
+  handleDelete = counterId => {
     let counters = this.state.counters.filter(c => c.id !== counterId);
 
-    this.setState({ counters: counters })
+    this.setState({ counters: counters });
   };
 
   handleReset = () => {
@@ -35,32 +35,48 @@ class App extends Component {
       return c;
     });
 
-    this.setState({ counters: counters })
-  }
+    this.setState({ counters: counters });
+  };
 
-  handleIncrement = (counter) => {
+  handleIncrement = counter => {
     let counters = [...this.state.counters];
     let index = counters.indexOf(counter);
     counters[index] = { ...counter };
     counters[index].value++;
-    this.setState({ counters: counters })
-  }
+    this.setState({ counters: counters });
+  };
+
+  handleReduce = counter => {
+    let counters = [...this.state.counters];
+    let index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    if (counters[index].value === 0){
+
+    } else {
+      counters[index].value--;
+    }
+
+    this.setState({ counters: counters });
+  };
 
   render() {
     console.log("App - Rendered");
     return (
       <React.Fragment>
-        <NavBar totalCounters={this.state.counters.filter(c => c.value > 0).length } />
+        <NavBar
+          totalCounters={this.state.counters.filter(c => c.value > 0).length}
+        />
         <main className="container">
-          <Counters 
+          <Counters
             counters={this.state.counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onReduce={this.handleReduce}
             onDelete={this.handleDelete}
           />
         </main>
       </React.Fragment>
-    ); 
+    );
   }
 }
 

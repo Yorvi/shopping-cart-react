@@ -5,9 +5,13 @@ class Counter extends Component {
     console.log("Previous Props", prevProps);
     console.log("Previous State", prevState);
     if (prevProps.counter.value !== this.props.counter.value) {
-      //
+      // AJAX calls and get new data from server
     }
   };
+
+  componentWillUnmount() {
+    console.log('App - Unmounted')
+  }
 
   render() {
     console.log("Counter - Rendered");
@@ -18,9 +22,16 @@ class Counter extends Component {
 
         <button
           onClick={() => this.props.onIncrement(this.props.counter)}
-          className="btn btn-secondary btn-sm "
+          className="btn btn-secondary btn-sm m-1"
         >
-          Increment
+          +
+        </button>
+
+        <button
+          onClick={() => this.props.onReduce(this.props.counter)}
+          className={this.getReduceClasses()}
+        >
+          -
         </button>
 
         <button
@@ -31,18 +42,24 @@ class Counter extends Component {
         </button>
       </div>
     );
-  }
+  };
+
+  getReduceClasses() {
+    let classes = "btn btn-sm m-1 btn-";
+    classes += this.props.counter.value === 0 ? "dark" : "secondary";
+    return classes;
+  };
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
     classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
-  }
+  };
 
   formatCount() {
     let { value } = this.props.counter;
     return this.props.counter.value === 0 ? "Zero" : this.props.counter.value;
-  }
+  };
 }
  
 export default Counter;
