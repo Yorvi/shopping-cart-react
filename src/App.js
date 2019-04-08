@@ -6,11 +6,11 @@ import './App.css';
 class App extends Component {
   state = {
     counters: [
-      { id: 1, value: 0 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 },
-      { id: 5, value: 0 }
+      { id: 1, itemName: 'Item Name 1', stock: 10, value: 0 },
+      { id: 2, itemName: 'Item Name 2', stock: 12, value: 0 },
+      { id: 3, itemName: 'Item Name 3', stock: 10, value: 0 },
+      { id: 4, itemName: 'Item Name 4', stock: 7, value: 0 },
+      { id: 5, itemName: 'Item Name 5', stock: 15, value: 0 }
     ]
   };
 
@@ -42,7 +42,12 @@ class App extends Component {
     let counters = [...this.state.counters];
     let index = counters.indexOf(counter);
     counters[index] = { ...counter };
-    counters[index].value++;
+    if(counters[index].value >= counters[index].stock) {
+
+    } else {
+      counters[index].value++;
+    }
+
     this.setState({ counters: counters });
   };
 

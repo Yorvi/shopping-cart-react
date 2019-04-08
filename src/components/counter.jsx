@@ -7,22 +7,26 @@ class Counter extends Component {
     if (prevProps.counter.value !== this.props.counter.value) {
       // AJAX calls and get new data from server
     }
-  };
+  }
 
   componentWillUnmount() {
-    console.log('App - Unmounted')
+    console.log("App - Unmounted");
   }
 
   render() {
     console.log("Counter - Rendered");
 
     return (
-      <div>
+      <div className="m-2">
+        <div>
+          <strong>{this.props.itemName}</strong>{" "}
+          <small>Available: {this.formatStock()}</small>
+        </div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
 
         <button
           onClick={() => this.props.onIncrement(this.props.counter)}
-          className="btn btn-secondary btn-sm m-1"
+          className={this.getIncrementClasses()}
         >
           +
         </button>
@@ -42,24 +46,39 @@ class Counter extends Component {
         </button>
       </div>
     );
-  };
+  }
+
+  getIncrementClasses() {
+    let classes = "btn btn-sm m-1 btn-";
+    classes += this.props.counter.stock === this.props.counter.value ? "dark" : "secondary";
+    return classes;
+  }
 
   getReduceClasses() {
     let classes = "btn btn-sm m-1 btn-";
     classes += this.props.counter.value === 0 ? "dark" : "secondary";
     return classes;
-  };
+  }
 
   getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.props.counter.value === 0 ? "warning" : "primary";
+    let classes = "badge badge-";
+    classes +=
+      this.props.counter.value === 0 ? "warning mr-2 " : "primary mr-2";
     return classes;
-  };
+  }
 
   formatCount() {
     let { value } = this.props.counter;
+
     return this.props.counter.value === 0 ? "Zero" : this.props.counter.value;
-  };
+  }
+
+  formatStock() {
+    let { value } = this.props.counter;
+    let { stock } = this.props.counter;
+
+    return this.props.counter.stock - this.props.counter.value;
+  }
 }
  
 export default Counter;
