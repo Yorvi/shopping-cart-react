@@ -17,12 +17,16 @@ class Counter extends Component {
     console.log("Counter - Rendered");
 
     return (
-      <div className="m-2">
+      <div className="m-2 counter">
         <div>
-          <strong>{this.props.itemName}</strong>{" "}
-          <small>Available: {this.formatStock()}</small>
+          <strong>{this.props.itemName}</strong>
         </div>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+
+        <div className="my-badge">
+          <span className={this.getBadgeClasses()}>
+            {this.formatCount()}
+          </span>
+        </div>
 
         <button
           onClick={() => this.props.onIncrement(this.props.counter)}
@@ -44,26 +48,30 @@ class Counter extends Component {
         >
           Delete
         </button>
+        <br />
+        <small>Available: {this.formatStock()}</small>
       </div>
     );
   }
 
   getIncrementClasses() {
-    let classes = "btn btn-sm m-1 btn-";
-    classes += this.props.counter.stock === this.props.counter.value ? "dark" : "secondary";
+    let classes = "btn btn-sm m-1 increment btn-";
+    classes +=
+      this.props.counter.stock === this.props.counter.value
+        ? "dark"
+        : "secondary";
     return classes;
   }
 
   getReduceClasses() {
-    let classes = "btn btn-sm m-1 btn-";
+    let classes = "btn btn-sm m-1 reduce btn-";
     classes += this.props.counter.value === 0 ? "dark" : "secondary";
     return classes;
   }
 
   getBadgeClasses() {
     let classes = "badge badge-";
-    classes +=
-      this.props.counter.value === 0 ? "warning mr-2 " : "primary mr-2";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 

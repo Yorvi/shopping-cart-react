@@ -6,11 +6,11 @@ import './App.css';
 class App extends Component {
   state = {
     counters: [
-      { id: 1, itemName: 'Item Name 1', stock: 10, value: 0 },
-      { id: 2, itemName: 'Item Name 2', stock: 12, value: 0 },
-      { id: 3, itemName: 'Item Name 3', stock: 10, value: 0 },
-      { id: 4, itemName: 'Item Name 4', stock: 7, value: 0 },
-      { id: 5, itemName: 'Item Name 5', stock: 15, value: 0 }
+      { id: 1, itemName: 'Football Helmet', stock: 10, value: 0, price: 49.99 },
+      { id: 2, itemName: 'Soccer Jersey', stock: 12, value: 0, price: 64.99 },
+      { id: 3, itemName: 'Baseball Cap', stock: 10, value: 0, price: 29.99 },
+      { id: 4, itemName: 'Baseball Glove', stock: 7, value: 0, price: 149.99 },
+      { id: 5, itemName: 'Basketball', stock: 15, value: 0, price: 19.99 }
     ]
   };
 
@@ -42,14 +42,17 @@ class App extends Component {
     let counters = [...this.state.counters];
     let index = counters.indexOf(counter);
     counters[index] = { ...counter };
-    if(counters[index].value >= counters[index].stock) {
+
+    if(counters[index].value == counters[index].stock) {
 
     } else {
       counters[index].value++;
+
     }
 
     this.setState({ counters: counters });
   };
+
 
   handleReduce = counter => {
     let counters = [...this.state.counters];
